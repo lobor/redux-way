@@ -4,16 +4,22 @@ export default class UserModel extends Model {
 	static modelName = 'user'
 
 	static state = {
-		name: 'toto'
+		name: 'foo'
 	}
 
 	static constants = {
 		SET_USER: 'SET_USER'
 	}
 
+	static actions = {
+		changeName: function () {
+			return {type: UserModel.constants.SET_USER}
+		}
+	}
+
 	reducer = {
 		[UserModel.constants.SET_USER]: function (state, action, model) {
-			model.update({ name: 'lionel' })
+			model.update({ name: 'bar' })
 		},
 	}
 }

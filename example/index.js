@@ -21,5 +21,3 @@ ReactDom.render(
 	</Provider>,
 	document.getElementById('root')
 )
-
-store.dispatch({type: 'SET_USER'})

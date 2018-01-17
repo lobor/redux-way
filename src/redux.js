@@ -24,27 +24,26 @@ export const connect = (state, actions = {}) => {
 
 			constructor(props, context) {
 				super(props, context);
+				this.state = {};
+
 				let setState = typeof state === 'function' ? state(this.context.store.getState()) : {};
 				for (let name in actions) {
 					setState[name] = (e, ...params) => {
 						this.context.store.dispatch(actions[name](...params))
 					};
 				}
-				console.log(setState, {toto:'titi', ...setState});
-				this.state = { ...setState }
-				console.log(this.state);
+				this.state = setState
 			}
 
 			componentWillMount() {
 				this.subscribe = this.context.store.subscribe(() => {
-					let state = this.context.store.getState();
+					let setState = typeof state === 'function' ? state(this.context.store.getState()) : {};
 					let newState = {};
-					for (let key in state) {
-						if (this.state.hasOwnProperty(key) && JSON.stringify(this.state[key]) !== JSON.stringify(state[key])) {
-							newState[key] = state[key]
+					for (let key in setState) {
+						if (this.state.hasOwnProperty(key) && JSON.stringify(this.state[key]) !== JSON.stringify(setState[key])) {
+							newState[key] = setState[key]
 						}
 					}
-
 					if (!isEmpty(newState)) {
 						this.setState(newState);
 					}

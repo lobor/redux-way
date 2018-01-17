@@ -11,10 +11,8 @@ export default class Model {
 
 		this.constants = constants;
 		this.modelName = modelName;
-	}
 
-	findById(id) {
-
+		Model.getModel = () => (this)
 	}
 
 	update (state) {
@@ -26,14 +24,4 @@ export default class Model {
 			this.state = state;
 		}
 	}
-
-	create () {
-
-	}
-
-	remove () {
-
-	}
-
-
 }

@@ -1,0 +1,36 @@
+{
+  "name": "redux-way",
+  "version": "0.0.1",
+  "description": "A small, simple and immutable model to manage data in your Redux store.",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lobor/redux-way.git"
+  },
+  "keywords": [
+    "redux",
+    "react",
+    "redux-saga",
+    "react-redux"
+  ],
+  "author": "Lionel Bertrand",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lobor/redux-way/issues"
+  },
+  "homepage": "https://github.com/lobor/redux-way#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "webpack": "^3.10.0"
+  }
+}

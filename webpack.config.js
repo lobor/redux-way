@@ -3,7 +3,6 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: './index.js',
-    devtool: 'source-map',
     output: {
         path: path.resolve('./dist'),
         filename: "index.js",

@@ -1,25 +1,13 @@
 export default class Model {
-	constructor({ state, constants, modelName }) {
-		this.state = {};
-		if (state instanceof Object || state instanceof Array) {
-			for (let name in state) {
-				Object.defineProperty(this.state, name, { value: state[name]});
-			}
-		} else {
-			this.state = state;
-		}
-
+	constructor({state, constants, modelName} = {}) {
+		this.state = state;
 		this.constants = constants;
 		this.modelName = modelName;
-
-		Model.getModel = () => (this)
 	}
 
 	update (state) {
-		if (this.state instanceof Object) {
+		if (this.state instanceof Object && !Array.isArray(this.state)) {
 			this.state = { ...this.state, ...state }
-		} else if (this.state instanceof Array) {
-			this.state = [...this.state, ...state]
 		} else {
 			this.state = state;
 		}

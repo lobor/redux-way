@@ -5,6 +5,7 @@
 	"main": "lib/index.js",
 	"scripts": {
 		"build": "webpack",
+		"publish": "npm run build && npm publish",
 		"test": "jest"
 	},
 	"repository": {

@@ -1,14 +1,17 @@
 import React from 'react'
-import renderer from 'react-test-renderer';
-
+import ReactTestRenderer from 'react-test-renderer';
 import Provider from '../src/Provider';
 
 describe('Provider', () => {
 	it('must ', () => {
-		renderer.create(
-			<Provider>
-				<div></div>,
+		const store = {};
+		const renderer = ReactTestRenderer.create(
+			<Provider store={store}>
+				<div></div>
 			</Provider>
-		);
+		).toJSON();
+
+		expect(renderer).toMatchSnapshot();
+		
 	});
 })

@@ -1,17 +1,10 @@
 import React from 'react';
 import ReactDom from 'react-dom'
-import { createStore } from "redux"
 
-import { Register, createReducer, Provider } from '../'
-
-import {CounterModel, UserModel} from './models'
+import store from './store'
+import { Provider } from '../'
 
 import { Counter, User } from './components'
-
-const register = new Register();
-register.register(CounterModel, UserModel)
-
-const store = createStore(createReducer(register));
 
 
 ReactDom.render(

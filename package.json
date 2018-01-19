@@ -1,11 +1,11 @@
 {
 	"name": "redux-way",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "A small, simple and immutable model to manage data in your Redux store.",
 	"main": "lib/index.js",
 	"scripts": {
 		"build": "webpack",
-		"publish": "npm run build && npm publish",
+		"publish": "npm run build & npm publish",
 		"test": "jest"
 	},
 	"repository": {

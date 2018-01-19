@@ -51,7 +51,7 @@ import { CounterModel } from './model';
 
 const register = new Register();
 
-// Register yout models
+// Register your models
 register.register(CounterModel);
 
 const store = createStore(createReducer(register));
@@ -105,7 +105,7 @@ const sagaMiddleware = createSagaMiddleware()
 
 const register = new Register();
 
-// Register yout models
+// Register your models
 register.register(CounterModel);
 
 const store = createStore(createReducer(register));
@@ -121,6 +121,7 @@ import {delay} from 'redux-saga'
 import {put, takeEvery} from 'redux-saga/effects'
 
 export const INCREMENT = 'INCREMENT';
+export const ASYNC_INCREMENT = 'ASYNC_INCREMENT';
 export const DECREMENT = 'DECREMENT';
 export const RESET = 'RESET';
 
@@ -134,6 +135,7 @@ export default class CounterModel extends Model {
 	// Differents actions related to the model
 	static actions = {
 		increment: () => ({type: INCREMENT}),
+		asyncIncrement: () => ({type: ASYNC_INCREMENT}),
 		decrement: () => ({type: DECREMENT}),
 		reset: () => ({type: RESET})
 	};
@@ -141,12 +143,12 @@ export default class CounterModel extends Model {
 	// launch by sagaMiddleware.run
 	run = function* () {
 		// Use static method UserModel.self() of your class for get "this" of class
-		yield takeEvery(SET_USER, UserModel.self().changeName)
+		yield takeEvery(ASYNC_INCREMENT, UserModel.self().changeName)
 	}
 
 	changeName = function* () {
 		yield delay(1000);
-		yield put({type: SET_USER_SUCCESS})
+		yield put({type: INCREMENT})
 	}
 
 	// Reducer linked by constants

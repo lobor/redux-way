@@ -1,8 +1,9 @@
 export default class Model {
-	constructor({state, constants, modelName} = {}) {
+	constructor ({state, constants, modelName} = {}) {
 		this.state = state;
-		this.constants = constants;
 		this.modelName = modelName;
+
+		Model.self = () => (this);
 	}
 
 	update (state) {
@@ -12,4 +13,6 @@ export default class Model {
 			this.state = state;
 		}
 	}
+
+	run = function* (){}
 }

@@ -16,6 +16,10 @@ npm install --save redux-way
 ```javascript
 import { Model } from 'redux-way';
 
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
+export const RESET = 'RESET';
+
 export default class CounterModel extends Model {
 	// Used to resolve all related store 
 	static modelName = 'counter';
@@ -23,25 +27,18 @@ export default class CounterModel extends Model {
 	// Initial state
 	static state = 0;
 
-	// Constants related to the model
-	static constants = {
-		INCREMENT: 'INCREMENT',
-		DECREMENT: 'DECREMENT',
-		RESET: 'RESET'
-	};
-
 	// Differents actions related to the model
 	static actions = {
-		increment: () => ({type: CounterModel.constants.INCREMENT}),
-		decrement: () => ({type: CounterModel.constants.DECREMENT}),
-		reset: () => ({type: CounterModel.constants.RESET})
+		increment: () => ({type: INCREMENT}),
+		decrement: () => ({type: DECREMENT}),
+		reset: () => ({type: RESET})
 	};
 
 	// Reducer linked by constants
 	reducer = {
-		[CounterModel.constants.INCREMENT]: (state, action, model) => {model.update(state + 1)},
-		[CounterModel.constants.DECREMENT]: (state, action, model) => {model.update(state - 1)},
-		[CounterModel.constants.RESET]: (state, action, model) => {model.update(0)}
+		[INCREMENT]: (state, action, model) => {model.update(state + 1)},
+		[DECREMENT]: (state, action, model) => {model.update(state - 1)},
+		[RESET]: (state, action, model) => {model.update(0)}
 	};
 }
 ```
@@ -53,6 +50,7 @@ import { Register } from 'redux-way';
 import { CounterModel } from './model';
 
 const register = new Register();
+
 // Register yout models
 register.register(CounterModel);
 
@@ -93,6 +91,71 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter)
+```
+
+### Use redux-saga
+```javascript
+import { createStore } from 'redux';
+import { Register } from 'redux-way';
+import createSagaMiddleware from 'redux-saga'
+
+import { CounterModel } from './model';
+
+const sagaMiddleware = createSagaMiddleware()
+
+const register = new Register();
+
+// Register yout models
+register.register(CounterModel);
+
+const store = createStore(createReducer(register));
+
+// register sagaMiddleware, launch after store has been created
+register.sagaMiddleware(sagaMiddleware);
+```
+
+
+```javascript
+import { Model } from 'redux-way';
+import {delay} from 'redux-saga'
+import {put, takeEvery} from 'redux-saga/effects'
+
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
+export const RESET = 'RESET';
+
+export default class CounterModel extends Model {
+	// Used to resolve all related store 
+	static modelName = 'counter';
+
+	// Initial state
+	static state = 0;
+
+	// Differents actions related to the model
+	static actions = {
+		increment: () => ({type: INCREMENT}),
+		decrement: () => ({type: DECREMENT}),
+		reset: () => ({type: RESET})
+	};
+
+	// launch by sagaMiddleware.run
+	run = function* () {
+		// Use static method UserModel.self() of your class for get "this" of class
+		yield takeEvery(SET_USER, UserModel.self().changeName)
+	}
+
+	changeName = function* () {
+		yield delay(1000);
+		yield put({type: SET_USER_SUCCESS})
+	}
+
+	// Reducer linked by constants
+	reducer = {
+		[INCREMENT]: (state, action, model) => {model.update(state + 1)},
+		[DECREMENT]: (state, action, model) => {model.update(state - 1)},
+		[RESET]: (state, action, model) => {model.update(0)}
+	};
+}
 ```
 
 ## Api

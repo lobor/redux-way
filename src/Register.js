@@ -1,6 +1,7 @@
 export default class Register {
 	constructor() {
-        this.models = [];
+		this.models = [];
+		this.saga = false;
 	}
 
 	register(...models) {
@@ -11,6 +12,13 @@ export default class Register {
 				modelName: model.modelName
 			}))
 		})
+	}
+
+	sagaMiddleware(saga) {
+		this.saga = saga;
+		this.models.forEach((model) => {
+			this.saga.run(model.run);
+		});
 	}
 
 	getState() {

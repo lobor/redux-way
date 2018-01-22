@@ -3,6 +3,12 @@ import Model from '../src/Model'
 let model;
 
 describe('Model', () => {
+	it('must create a static function in custructor name Model.self', () => {
+		let model = new Model();
+		expect(typeof Model.self).toEqual('function')
+		expect(Model.self() instanceof Model).toBe(true)
+	})
+
 	it('must not have error on create instance, and check function of class', () => {
 		let model = new Model();
 		expect(typeof model.update).toBe('function')
@@ -40,4 +46,16 @@ describe('Model', () => {
 		model.update(modifState)
 		expect(model.state).toEqual(modifState)
 	});
+
+	it('must have function generator run ', () => {
+		const model = new Model();
+		const run = model.run()
+		expect(typeof model.run).toEqual('function')
+		expect(typeof run.next).toEqual('function')
+
+		run.next();
+		expect(run.value).toBe(void 0)
+		expect(run.done).toBe(void 0)
+		expect(run.next().done).toBe(true)
+	})
 })

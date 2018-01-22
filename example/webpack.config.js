@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const Jarvis = require('webpack-jarvis');
 
 module.exports = {
     entry: './index.js',
@@ -23,11 +22,6 @@ module.exports = {
             },
         ],
 	},
-	plugins: [
-		new Jarvis({
-			port: 1337 // optional: set a port
-		  })
-	],
 	devServer: {
 		contentBase: path.resolve(__dirname)
 	}

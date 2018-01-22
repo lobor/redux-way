@@ -142,8 +142,7 @@ export default class CounterModel extends Model {
 
 	// launch by sagaMiddleware.run
 	run = function* () {
-		// Use static method UserModel.self() of your class for get "this" of class
-		yield takeEvery(ASYNC_INCREMENT, CounterModel.self().changeName)
+		yield takeEvery(ASYNC_INCREMENT, this.changeName)
 	}
 
 	changeName = function* () {

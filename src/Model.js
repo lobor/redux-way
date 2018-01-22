@@ -3,7 +3,7 @@ export default class Model {
 		this.state = state;
 		this.modelName = modelName;
 
-		Model.self = () => (this);
+		this.run = this.run.bind(this);
 	}
 
 	update (state) {

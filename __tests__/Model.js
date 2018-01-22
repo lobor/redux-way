@@ -3,12 +3,6 @@ import Model from '../src/Model'
 let model;
 
 describe('Model', () => {
-	it('must create a static function in custructor name Model.self', () => {
-		let model = new Model();
-		expect(typeof Model.self).toEqual('function')
-		expect(Model.self() instanceof Model).toBe(true)
-	})
-
 	it('must not have error on create instance, and check function of class', () => {
 		let model = new Model();
 		expect(typeof model.update).toBe('function')

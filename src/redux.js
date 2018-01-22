@@ -25,7 +25,7 @@ export const connect = (state, actions = {}) => {
 			constructor(props, context) {
 				super(props, context);
 				this.state = {};
-				
+
 				let setState = typeof state === 'function' ? state(this.context.store.getState()) : {};
 				for (let name in actions) {
 					setState[name] = (e, ...params) => {
@@ -51,7 +51,9 @@ export const connect = (state, actions = {}) => {
 			}
 
 			componentWillUnmount() {
-				this.subscribe.unsubscribe()
+				if (this.subscribe && this.subscribe.unsubscribe && typeof this.subscribe.unsubscribe === 'function') {
+					this.subscribe.unsubscribe()
+				}
 			}
 
 			render() {

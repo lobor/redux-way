@@ -1,5 +1,5 @@
 import React from 'react'
-import {connect} from '../../';
+import {connect} from '../../src/redux';
 import { UserModel } from '../models'
 
 export class User extends React.Component {
@@ -13,7 +13,7 @@ export class User extends React.Component {
 	}
 }
 
-let mapStateToProps = ({user}) => {
+let mapStateToProps = ({ user }) => {
 	return {name: user.name}
 }
 let actions = {

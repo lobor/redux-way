@@ -1,4 +1,8 @@
-import { Model } from '../../'
+import Model from '../../src/Model'
+
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
+export const RESET = 'RESET';
 
 export default class CounterModel extends Model {
 	static modelName = 'counter'
@@ -12,14 +16,14 @@ export default class CounterModel extends Model {
 	}
 
 	static actions = {
-		increment: () => ({type: CounterModel.constants.INCREMENT}),
-		decrement: () => ({type: CounterModel.constants.DECREMENT}),
-		reset: () => ({type: CounterModel.constants.RESET}),
+		increment: () => ({type: INCREMENT}),
+		decrement: () => ({type: DECREMENT}),
+		reset: () => ({type: RESET}),
 	}
 
 	reducer = {
-		[CounterModel.constants.INCREMENT]: (state, action, model) => {model.update(state + 1)},
-		[CounterModel.constants.DECREMENT]: (state, action, model) => {model.update(state - 1)},
-		[CounterModel.constants.RESET]: (state, action, model) => {model.update(0)}
+		[INCREMENT]: (state, action, model) => {model.update(state + 1)},
+		[DECREMENT]: (state, action, model) => {model.update(state - 1)},
+		[RESET]: (state, action, model) => {model.update(0)}
 	}
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { CounterModel } from '../models'
-import {connect} from '../../'
+import {connect} from '../../src/redux';
 
 export class Counter extends React.Component{
 	render() {

@@ -42,9 +42,12 @@ describe('Model', () => {
 	});
 
 	it('must have function generator run ', () => {
-		const model = new Model();
-		const run = model.run()
+		class Test extends Model{
+			run = function* () {}
+		}
+		const model = new Test();
 		expect(typeof model.run).toEqual('function')
+		const run = model.run()
 		expect(typeof run.next).toEqual('function')
 
 		run.next();

@@ -2,8 +2,6 @@ export default class Model {
 	constructor ({state, constants, modelName} = {}) {
 		this.state = state;
 		this.modelName = modelName;
-
-		this.run = this.run.bind(this);
 	}
 
 	update (state) {
@@ -13,6 +11,4 @@ export default class Model {
 			this.state = state;
 		}
 	}
-
-	run = function* (){}
 }

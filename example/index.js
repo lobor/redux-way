@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDom from 'react-dom'
 
 import store from './store'
-import { Provider } from '../'
+import Provider from '../src/Provider'
 
 import { Counter, User } from './components'
-
 
 ReactDom.render(
 	<Provider store={store}>

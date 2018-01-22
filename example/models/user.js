@@ -1,6 +1,6 @@
 import {delay} from 'redux-saga'
 import {put, takeEvery} from 'redux-saga/effects'
-import { Model } from '../../'
+import Model from '../../src/Model'
 
 export const SET_USER = 'SET_USER';
 export const SET_USER_SUCCESS = 'SET_USER_SUCCESS';
@@ -16,10 +16,10 @@ export default class UserModel extends Model {
 		changeName: function () {
 			return {type: SET_USER}
 		}
-	}
+	};
 
 	run = function* () {
-		yield takeEvery(SET_USER, UserModel.self().changeName)
+		yield takeEvery(SET_USER, this.changeName)
 	}
 
 	changeName = function* () {

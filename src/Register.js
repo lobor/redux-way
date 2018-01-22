@@ -1,3 +1,5 @@
+let genbind = require('generator-bind');
+
 export default class Register {
 	constructor() {
 		this.models = [];
@@ -6,18 +8,26 @@ export default class Register {
 
 	register(...models) {
 		models.forEach((model) => {
-			this.models.push(new model({
+			let instance = new model({
 				state: model.state,
 				constants: model.constants,
 				modelName: model.modelName
-			}))
+			})
+
+			if (instance.run) {
+				instance.run = genbind(instance, instance.run);
+			}
+
+			this.models.push(instance)
 		})
 	}
 
 	sagaMiddleware(saga) {
 		this.saga = saga;
 		this.models.forEach((model) => {
-			this.saga.run(model.run);
+			if (model.run) {
+				this.saga.run(model.run);
+			}
 		});
 	}
 

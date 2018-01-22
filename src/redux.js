@@ -25,7 +25,7 @@ export const connect = (state, actions = {}) => {
 			constructor(props, context) {
 				super(props, context);
 				this.state = {};
-
+				
 				let setState = typeof state === 'function' ? state(this.context.store.getState()) : {};
 				for (let name in actions) {
 					setState[name] = (e, ...params) => {

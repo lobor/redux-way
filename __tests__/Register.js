@@ -34,8 +34,10 @@ describe('Register', () => {
 	it('must call run function of react-saga', () => {
 		const sagaMiddleware = {run: jest.fn()};
 		const register = new Register();
-
-		register.register(Model);
+		class Test extends Model{
+			run = function* () {}
+		}
+		register.register(Test);
 
 		register.sagaMiddleware(sagaMiddleware)
 

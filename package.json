@@ -1,6 +1,6 @@
 {
 	"name": "redux-way",
-	"version": "0.2.3",
+	"version": "0.2.4",
 	"description": "A small, simple and immutable model to manage data in your Redux store.",
 	"main": "dist/index.js",
 	"scripts": {

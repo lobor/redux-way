@@ -36,7 +36,9 @@ export const connect = (state, actions = {}) => {
 
 				let staticParams = Object.keys(Child);
 				for (let staticParam of staticParams) {
-					WrappedComponent.prototype[staticParam] = Child[staticParam];
+					if (staticParam !== 'defaultProps' && staticParam !== 'propTypes') {
+						WrappedComponent.prototype[staticParam] = Child[staticParam];
+					}
 				}
 			}
 

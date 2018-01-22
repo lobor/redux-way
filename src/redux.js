@@ -33,6 +33,11 @@ export const connect = (state, actions = {}) => {
 					};
 				}
 				this.state = setState
+
+				let staticParams = Object.keys(Child);
+				for (let staticParam of staticParams) {
+					WrappedComponent.prototype[staticParam] = Child[staticParam];
+				}
 			}
 
 			componentWillMount() {

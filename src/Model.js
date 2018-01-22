@@ -1,7 +1,12 @@
+let genbind = require('generator-bind');
+
 export default class Model {
 	constructor ({state, constants, modelName} = {}) {
 		this.state = state;
 		this.modelName = modelName;
+		if (this.run) {
+			this.run = genbind(this, this.run);
+		}
 	}
 
 	update (state) {

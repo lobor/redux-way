@@ -44,16 +44,21 @@ export const connect = (state, actions = {}) => {
 							newState[key] = setState[key]
 						}
 					}
-					if (!isEmpty(newState)) {
+					if (!isEmpty(newState) && this.mount) {
 						this.setState(newState);
 					}
 				})
 			}
 
 			componentWillUnmount() {
+				this.mount = false;
 				if (this.subscribe && this.subscribe.unsubscribe && typeof this.subscribe.unsubscribe === 'function') {
 					this.subscribe.unsubscribe()
 				}
+			}
+
+			componentDidMount() {
+				this.mount = true;
 			}
 
 			render() {

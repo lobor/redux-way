@@ -18,7 +18,7 @@ export default class UserModel extends Model {
 		}
 	};
 
-	run = function* () {
+	*run () {
 		yield takeEvery(SET_USER, this.changeName)
 	}
 

@@ -1,5 +1,3 @@
-let genbind = require('generator-bind');
-
 export default class Register {
 	constructor() {
 		this.models = [];
@@ -8,17 +6,11 @@ export default class Register {
 
 	register(...models) {
 		models.forEach((model) => {
-			let instance = new model({
+			this.models.push(new model({
 				state: model.state,
 				constants: model.constants,
 				modelName: model.modelName
-			})
-
-			if (instance.run) {
-				instance.run = genbind(instance, instance.run);
-			}
-
-			this.models.push(instance)
+			}))
 		})
 	}
 
